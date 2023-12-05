@@ -13,3 +13,7 @@ tasks {
         gradleVersion = "8.5"
     }
 }
+
+tasks.withType<JavaExec>().configureEach {
+    jvmArgs = listOf("-Xms1g", "-Xmx2g")
+}

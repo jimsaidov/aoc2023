@@ -3,6 +3,7 @@ package day04
 import Puzzle
 import kotlin.math.pow
 import readFileInput
+import toIntList
 
 object Day04 : Puzzle<Int, Int, List<String>> {
     override fun solvePartOne(inputData: List<String>): Int =
@@ -50,5 +51,3 @@ private data class Card (
     val matches: List<Int>
         get() = winningNumbers.filter { playerNumbers.contains(it) }
 }
-
-private fun String.toIntList() = "\\d+".toRegex().findAll(this).map { it.value.toInt() }.toList()
