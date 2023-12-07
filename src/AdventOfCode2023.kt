@@ -1,11 +1,11 @@
-import day06.Day06
+import day07.Day07
 
 fun main() {
-    val testInput = Day06.readInput("Test")
-    check(Day06.solvePartOne(testInput) == 288L)
-    check(Day06.solvePartTwo(testInput) == 71503L)
+    val testInput = Day07.readInput("Test")
+    check(Day07.solvePartOne(testInput) == 288L)
+    check(Day07.solvePartTwo(testInput) == 71503L)
 
-    val input = Day06.readInput("Input")
-    Day06.solvePartOne(input).println()
-    Day06.solvePartTwo(input).println()
+    val input = Day07.readInput("Input")
+    Day07.solvePartOne(input).println()
+    Day07.solvePartTwo(input).println()
 }
