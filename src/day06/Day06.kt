@@ -2,12 +2,12 @@ package day06
 
 import Puzzle
 import readFileInput
-import toLongList
+import toRegexLongList
 
 object Day06 : Puzzle<Long, Long, List<String>> {
     override fun solvePartOne(inputData: List<String>): Long {
-        val times = inputData.first().split(":").last().toLongList()
-        val distances = inputData.last().split(":").last().toLongList()
+        val times = inputData.first().split(":").last().toRegexLongList()
+        val distances = inputData.last().split(":").last().toRegexLongList()
 
         return times.zip(distances).map { (time, distance) ->
             getNumberOfWinWays(time, distance)

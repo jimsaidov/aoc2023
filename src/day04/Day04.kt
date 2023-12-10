@@ -3,7 +3,7 @@ package day04
 import Puzzle
 import kotlin.math.pow
 import readFileInput
-import toIntList
+import toRegexIntList
 
 object Day04 : Puzzle<Int, Int, List<String>> {
     override fun solvePartOne(inputData: List<String>): Int =
@@ -31,13 +31,13 @@ object Day04 : Puzzle<Int, Int, List<String>> {
             buildList {
                 inputData.map { line ->
                     val (cardIdPart, numbersPart) = line.split(": ")
-                    val cardId = cardIdPart.toIntList().first()
+                    val cardId = cardIdPart.toRegexIntList().first()
                     val (winningNumbersPart, playerNumbersPart) = numbersPart.split(" | ")
                     add(
                         Card(
                             cardId,
-                            winningNumbersPart.toIntList(),
-                            playerNumbersPart.toIntList()
+                            winningNumbersPart.toRegexIntList(),
+                            playerNumbersPart.toRegexIntList()
                         )
                     )
                 }

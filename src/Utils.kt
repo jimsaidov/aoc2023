@@ -20,6 +20,8 @@ fun String.md5() = BigInteger(1, MessageDigest.getInstance("MD5").digest(toByteA
  */
 fun Any?.println() = println(this)
 
-fun String.toIntList() = "\\d+".toRegex().findAll(this).map { it.value.toInt() }.toList()
+fun String.toRegexIntList() = "\\d+".toRegex().findAll(this).map { it.value.toInt() }.toList()
 
-fun String.toLongList() = "\\d+".toRegex().findAll(this).map { it.value.toLong() }.toList()
+fun String.toRegexLongList() = "\\d+".toRegex().findAll(this).map { it.value.toLong() }.toList()
+
+fun String.toLongList() = split(" ").map { it.toLong() }

@@ -2,28 +2,9 @@ package day05
 
 import Puzzle
 import println
-import toLongList
+import toRegexLongList
 import kotlin.io.path.Path
 import kotlin.io.path.readText
-
-data class Almanac(val seeds: List<Long>, val maps: List<List<Pair<LongProgression, LongProgression>>>)
-
-fun findDestination(mapRanges: List<Pair<LongProgression, LongProgression>>, source: Long): Long {
-    for ((sourceRange, destRange) in mapRanges) {
-        if (sourceRange.first <= source && source <= sourceRange.last) {
-            return destRange.first + source - sourceRange.first
-        }
-    }
-    return source
-}
-
-fun findLocation(seedIndex: Long, maps: List<List<Pair<LongProgression, LongProgression>>>): Long {
-    var location = seedIndex
-    for (i in maps.indices) {
-        location = findDestination(maps[i], location)
-    }
-    return location
-}
 
 object Day05 : Puzzle<Long, Long, String> {
     override fun solvePartOne(inputData: String): Long = transformInput(inputData).run {
@@ -52,10 +33,10 @@ object Day05 : Puzzle<Long, Long, String> {
 
     private fun transformInput(inputData: String): Almanac = inputData.split("\r\n\r\n").let { splitInput ->
         Almanac(
-            splitInput[0].toLongList(),
+            splitInput[0].toRegexLongList(),
             splitInput.drop(1).map { rawMap ->
             rawMap.split("\r\n").drop(1).map {
-                val (dest, start, length) = it.toLongList()
+                val (dest, start, length) = it.toRegexLongList()
                 val sourceProgression: LongProgression = start..<start + length
                 val targetProgression: LongProgression = dest..<dest + length
                 Pair(sourceProgression, targetProgression)
@@ -64,12 +45,21 @@ object Day05 : Puzzle<Long, Long, String> {
     }
 }
 
-fun main() {
-    val testInput = Day05.readInput("Test")
-    check(Day05.solvePartOne(testInput) == 35L)
-    check(Day05.solvePartTwo(testInput) == 46L)
+data class Almanac(val seeds: List<Long>, val maps: List<List<Pair<LongProgression, LongProgression>>>)
 
-    val input = Day05.readInput("Input")
-     Day05.solvePartOne(input).println()
-     Day05.solvePartTwo(input).println()
+fun findDestination(mapRanges: List<Pair<LongProgression, LongProgression>>, source: Long): Long {
+    for ((sourceRange, destRange) in mapRanges) {
+        if (sourceRange.first <= source && source <= sourceRange.last) {
+            return destRange.first + source - sourceRange.first
+        }
+    }
+    return source
+}
+
+fun findLocation(seedIndex: Long, maps: List<List<Pair<LongProgression, LongProgression>>>): Long {
+    var location = seedIndex
+    for (i in maps.indices) {
+        location = findDestination(maps[i], location)
+    }
+    return location
 }
